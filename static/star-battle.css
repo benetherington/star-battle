@@ -1,0 +1,64 @@
+body {
+    background-color: black;
+}
+
+.battle-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+    grid-template-rows: repeat(10, 60px);
+}
+
+.grid-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1px;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 40px;
+}
+.grid-cell:before {
+    content: attr(data-region);
+}
+
+[data-region='0'] {
+    background-color: #191716;
+    color: #e0e2db;
+}
+[data-region='1'] {
+    background-color: #4d3d1c;
+    color: #b8b7c7;
+}
+[data-region='2'] {
+    background-color: #806322;
+    color: #8f8bb3;
+}
+[data-region='3'] {
+    background-color: #e6af2e;
+    color: #66609f;
+}
+[data-region='4'] {
+    background-color: #e3c985;
+    color: #3d348b;
+}
+[data-region='5'] {
+    background-color: #e0e2db;
+    color: #191716;
+}
+[data-region='6'] {
+    background-color: #b8b7c7;
+    color: #4d3d1c;
+}
+[data-region='7'] {
+    background-color: #8f8bb3;
+    color: #806322;
+}
+[data-region='8'] {
+    background-color: #66609f;
+    color: #e6af2e;
+}
+[data-region='9'] {
+    background-color: #3d348b;
+    color: #e3c985;
+}
