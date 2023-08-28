@@ -121,7 +121,9 @@ const checkRules = () => {
     });
     const regionsWin = regionStars.every((r) => r === 2);
 
-    if (rowsWin && colsWin && regionsWin) throwParty();
+    const adjacentWin = true;
+
+    if (rowsWin && colsWin && regionsWin && adjacentWin) throwParty();
 };
 
 const throwParty = () => {
