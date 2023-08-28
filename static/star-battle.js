@@ -167,6 +167,14 @@ const countStars = (cells) => {
     return starred.length;
 };
 
+const onHelpClick = (event) => {
+    document.getElementById('rules-modal').classList.remove('hidden');
+    event.stopPropagation();
+};
+const onBodyClick = () => {
+    document.getElementById('rules-modal').classList.add('hidden');
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     const txt = await fetchLevel(1);
     displayLevel(txt);
@@ -176,4 +184,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         cell.addEventListener('pointerenter', onCellRollover);
         cell.addEventListener('click', onCellClick);
     });
+
+    // Add rules listener
+    document.getElementById('rules').addEventListener('click', onHelpClick);
+    document.body.addEventListener('click', onBodyClick);
 });

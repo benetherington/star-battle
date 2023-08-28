@@ -2,6 +2,9 @@ body {
     --cell-size: min(60px, 9vw, 9vh);
     background-color: #0d1613;
     font-family: 'Roboto', sans-serif;
+
+    margin: 0;
+    height: 100vh;
 }
 
 .grid-container {
@@ -201,6 +204,9 @@ body {
 /* ----------- *\
    RULES POPUP
 \* ----------- */
+.hidden {
+    display: none;
+}
 #rules-modal {
     position: absolute;
     box-sizing: border-box;
