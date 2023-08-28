@@ -19,10 +19,18 @@
 
     </head>
 
-<body>
-    <div class="battle-grid">
-
-    </div>
-</body>
+    <body>
+        <div class="battle-grid">
+            {% for row in range(0, 10) %}
+                <div class="battle-grid-row">
+                    {% for col in range(0, 10) %}
+                        <div class="battle-grid-cell" data-row="{{ row }}" data-col="{{ col }}"></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="row-slider"></div>
+            <div class="col-slider"></div>
+        </div>
+    </body>
 
 </html>

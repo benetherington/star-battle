@@ -1,64 +1,77 @@
 body {
-    background-color: black;
+    background-color: #0D1613;
 }
 
 .battle-grid {
     display: grid;
-    grid-template-columns: repeat(10, 60px);
     grid-template-rows: repeat(10, 60px);
+
+    --slider-row-idx: 0;
+    --slider-col-idx: 0;
 }
 
-.grid-cell {
+.battle-grid-row {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+}
+
+.battle-grid-cell {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    margin: 1px;
-    border: 1px solid black;
+    margin: 4px;
     font-weight: bold;
-    font-size: 40px;
+    /* font-size: 40px; */
 }
-.grid-cell:before {
+
+.battle-grid.show-region-numbers .battle-grid-cell:before {
     content: attr(data-region);
 }
 
-[data-region='0'] {
-    background-color: #191716;
-    color: #e0e2db;
+/* ------- *\
+   SLIDERS
+\* ------- */
+.row-slider,
+.col-slider {
+    position: absolute;
+    border: 6px solid #D0CFF9;
+
+    /* Let events drop down to cells */
+    pointer-events: none;
+    transition: top 300ms, left 300ms;
 }
-[data-region='1'] {
-    background-color: #4d3d1c;
-    color: #b8b7c7;
+
+.row-slider {
+    top: calc(6px + var(--slider-row-idx) * 60px);
+    left: 6px;
+    width: calc(600px - 8px);
+    height: calc(60px - 8px);
 }
-[data-region='2'] {
-    background-color: #806322;
-    color: #8f8bb3;
+
+.col-slider {
+    top: 6px;
+    left: calc(6px + var(--slider-col-idx) * 60px);
+    width: calc(60px - 8px);
+    height: calc(600px - 8px);
 }
-[data-region='3'] {
-    background-color: #e6af2e;
-    color: #66609f;
-}
-[data-region='4'] {
-    background-color: #e3c985;
-    color: #3d348b;
-}
-[data-region='5'] {
-    background-color: #e0e2db;
-    color: #191716;
-}
-[data-region='6'] {
-    background-color: #b8b7c7;
-    color: #4d3d1c;
-}
-[data-region='7'] {
-    background-color: #8f8bb3;
-    color: #806322;
-}
-[data-region='8'] {
-    background-color: #66609f;
-    color: #e6af2e;
-}
-[data-region='9'] {
-    background-color: #3d348b;
-    color: #e3c985;
-}
+
+[data-highlight-region='0'] .battle-grid-cell[data-region='0'] {}
+
+[data-highlight-region='1'] .battle-grid-cell[data-region='1'] {}
+
+[data-highlight-region='2'] .battle-grid-cell[data-region='2'] {}
+
+[data-highlight-region='3'] .battle-grid-cell[data-region='3'] {}
+
+[data-highlight-region='4'] .battle-grid-cell[data-region='4'] {}
+
+[data-highlight-region='5'] .battle-grid-cell[data-region='5'] {}
+
+[data-highlight-region='6'] .battle-grid-cell[data-region='6'] {}
+
+[data-highlight-region='7'] .battle-grid-cell[data-region='7'] {}
+
+[data-highlight-region='8'] .battle-grid-cell[data-region='8'] {}
+
+[data-highlight-region='9'] .battle-grid-cell[data-region='9'] {}
