@@ -5,22 +5,25 @@ const fetchLevel = async (levelNumber) => {
 };
 
 const displayLevel = (txt) => {
-    const {rows, regions} = parseLevelTxt(txt);
+    const {regions} = parseLevelTxt(txt);
 
     regions.forEach(([label, cells], regionIdx) => {
-        cells.forEach(([colIdx, rowIdx]) => {
-            const cellIdx = colIdx * 10 + rowIdx + 1;
+        cells.forEach(([row, col]) => {
             const cell = document.querySelector(
-                `.grid-cell:nth-child(${cellIdx})`,
+                `.battle-grid-cell[data-row="${row}"][data-col="${col}"]`,
             );
-            cell.dataset.region = regionIdx;
+            try {
+                cell.dataset.region = regionIdx;
+            } catch {
+                console.log(label, col, row);
+            }
         });
     });
 };
 
 const parseLevelTxt = (txt) => {
     const rows = txt
-        .split('\n')
+        .split(/[\r\n]/)
         .filter((s) => s)
         .map((r) => r.replaceAll(/\W/g, '').split(''));
 
@@ -39,15 +42,32 @@ const parseLevelTxt = (txt) => {
             .flat();
         return [regionName, addresses];
     });
+
     return {rows, regions};
 };
 
+const onCellRollover = (event) => {
+    const grid = document.querySelector('.battle-grid');
+
+    // Set row sliders
+    const rowIdx = event.target.dataset.row;
+    const colIdx = event.target.dataset.col;
+    grid.style.setProperty('--slider-row-idx', rowIdx);
+    grid.style.setProperty('--slider-col-idx', colIdx);
+
+    // Set region
+    const region = event.target.dataset.region;
+    grid.dataset.highlightRegion = region;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
-    for (let idx = 0; idx < 5 * 5 * 4; idx++) {
-        const cell = document.createElement('div');
-        cell.classList.add('grid-cell');
-        document.querySelector('.battle-grid').append(cell);
-    }
     const txt = await fetchLevel(1);
     displayLevel(txt);
+
+    // Add row/column/region highlighter listener
+    document
+        .querySelectorAll('.battle-grid-cell')
+        .forEach((cell) =>
+            cell.addEventListener('pointerenter', onCellRollover),
+        );
 });
