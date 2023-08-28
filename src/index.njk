@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <script src="static/star-battle.js"></script>
-    <link rel="stylesheet" href="./static/star-battle.css">
-</head>
+    <head>
+        <script src="static/star-battle.js"></script>
+        <link rel="stylesheet" href="./static/star-battle.css">
+
+        <style>
+            {% for regionIdx in range(10) %}
+                [data-region='{{ regionIdx }}'] {
+                    {% if regionIdx % 2 %}
+                        background-color: {{tofino[90 - regionIdx*3]}};
+                    {% else %}
+                        background-color: {{tofino[15 + regionIdx*3]}};
+                    {% endif %}
+                }
+            {% endfor %}
+        </style>
+
+    </head>
 
 <body>
     <div class="battle-grid">
