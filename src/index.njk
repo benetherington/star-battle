@@ -3,7 +3,11 @@
 
     <head>
         <script src="static/star-battle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
         <link rel="stylesheet" href="./static/star-battle.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <style>
             {% for regionIdx in range(10) %}
@@ -20,17 +24,53 @@
     </head>
 
     <body>
-        <div class="battle-grid">
-            {% for row in range(0, 10) %}
-                <div class="battle-grid-row">
-                    {% for col in range(0, 10) %}
-                        <div class="battle-grid-cell" data-row="{{ row }}" data-col="{{ col }}"></div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            <div class="row-slider"></div>
-            <div class="col-slider"></div>
+        <div class="grid-container">
+            <div class="battle-grid">
+                {% for row in range(0, 10) %}
+                    <div class="battle-grid-row">
+                        {% for col in range(0, 10) %}
+                            <div
+                                class="battle-grid-cell no-icon"
+                                data-row="{{ row }}"
+                                data-col="{{ col }}"
+                                id="cell-{{row}}-{{col}}"
+                            ></div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="row-slider"></div>
+                <div class="col-slider"></div>
+            </div>
+
+            <div class="footer">
+                <div id="hint" class="icon">{% include "lightbulb-fill.svg" %}</div>
+                <span id="star-count">0</span>
+                <div id="rules" class="icon">{% include "journal-bookmark.svg" %}</div>
+            </div>
+
+            <div id="rules-modal">
+                <h4>Star Battle</h4>
+            Also known as Two Not Touch, this is a fun and truly addictive logic
+            puzzle. The goal is to place 20 stars in the puzzle, such that
+            every row, column, and colored shape contains exactly
+            two stars. These stars may not be placed next to each other
+            — not even diagonally adjacent! This is one of those rare logic
+            puzzles, like Sudoku, that has extremely simple rules, yet there
+            are many strategies for solving it.<br>
+            
+            Click each square to cycle between a star, a placehoder question mark,
+            and blank.<br>
+            
+            Any star that shares a row, column, or region with too many other stars
+            will turn into a warning triangle, letting you know you've violated a rule.<br>
+            
+            The counter at the bottom tells you how many stars you have placed out of
+            the required total of 20 stars.<br>
+            
+            Click the lightbulb for a hint.
+            </div>
         </div>
+
     </body>
 
 </html>
